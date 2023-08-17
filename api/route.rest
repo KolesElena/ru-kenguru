@@ -1,0 +1,30 @@
+GET http://localhost:3000/profiles
+
+###
+
+GET http://localhost:3000/profiles/643074be56ac13f4339583
+
+###
+POST http://localhost:3000/profiles
+Content-Type: application/json
+
+{
+    "name": "Elena",
+    "age": "45"
+}
+
+###
+
+DELETE http://localhost:3000/profiles/643074be56ac13f4339583ae
+
+###
+
+PATCH http://localhost:3000/profiles/6430790b56ac13f4339583b4
+Content-Type: application/json
+
+{
+    "name": "Yana"
+}
+
+
+
