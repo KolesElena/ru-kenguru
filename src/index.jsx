@@ -7,8 +7,8 @@ import './index.css';
 import AuthProvider from './Context/Context';
 import {SignIn} from './SignIn/SignIn';
 import {SignUp} from './SignUp/SignUp';
-import { SelectSignUp } from './SelectSignUp/SelectSignUp';
 import { Nannies } from './NanniesList/NanniesList';
+import VerifyCode from './VerifyCode/VerifyCode';
 import Header from './Header/Header';
 const root = ReactDOM.createRoot(
   document.getElementById('root') 
@@ -24,6 +24,7 @@ root.render(
             <Route path="/login" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<div>Profile</div>} />
+            <Route path="/verify-code/:code" element={<VerifyCode />} />
           </Routes>
         </div>
       </AuthProvider>  

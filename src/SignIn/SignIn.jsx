@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react';
-import axios from 'axios';
+import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../Context/Context';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -35,43 +34,19 @@ const defaultTheme = createTheme() ;
 
 export const SignIn = () => {
   const navigate = useNavigate();
-
-  const {saveToken} = useContext(AuthContext);
-
-  const [profiles, setProfiles ] = useState([ ]);
-
-  const apiCall = (method, url, data, params, headers) => {
-    return axios({
-      method,
-      url,
-      data,
-      params,
-      headers,
-    });
-  };
-
-  const getProfiles = () => apiCall('get', 'http://localhost:3000/profiles').then(res => setProfiles(res.data));
-
-  const deleteProfile = () => apiCall('patch', 'http://localhost:3000/profiles/6430790b56ac13f4339583b4',{ name: 'Elena'} ).then(res => res.data);
-
+  const {login, isLogged} = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    getProfiles();
+    login(data.get('email'), data.get('password')).then(() => navigate('/')).catch((error) => console.log('Login error', error));
+  };
 
-    const response = await apiCall('post', 'http://localhost:3000/profiles/login',{ email: data.get('email'), password: data.get('password')} ).then(res => res.data);
-    console.log(response.token);
-    if (response) {
-      saveToken(response.token);
+  useEffect(() => {
+    if (isLogged) {
       navigate('/');
     }
-
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  }, [isLogged]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -95,6 +70,7 @@ export const SignIn = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  data-testid="email"
                   required
                   fullWidth
                   id="email"
@@ -108,6 +84,7 @@ export const SignIn = () => {
                 <TextField
                   required
                   fullWidth
+                  data-testid="password"
                   name="password"
                   label="Password"
                   type="password"

@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../Context/Context';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -37,36 +37,15 @@ const defaultTheme = createTheme() ;
 
 export const SignUp = () => {
 
-  const [profiles, setProfiles ] = useState([ ]);
   const [userType, setUserType] = useState('');
   const [address, setAddress] = useState();
-
-  const apiCall = (method, url, data, params, headers) => {
-    return axios({
-      method,
-      url,
-      data,
-      params,
-      headers,
-    });
-  };
-
-  const getProfiles = () => apiCall('get', 'http://localhost:3000/profiles').then(res => setProfiles(res.data));
-
-  const deleteProfile = () => apiCall('patch', 'http://localhost:3000/profiles/6430790b56ac13f4339583b4',{ name: 'Elena'} ).then(res => res.data);
-
+  const {signUp} = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    apiCall('post', 'http://localhost:3000/profiles',{ email: data.get('email'), password: data.get('password'), name: data.get('firstName'), surname: data.get('lastName'), userType: userType, address: address} ).then(res => res.data);
-    getProfiles();
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      userType: data.get('userType'),
-    });
+    signUp({ email: data.get('email'), password: data.get('password'), name: data.get('firstName'), surname: data.get('lastName'), userType: userType, address: address}).then();
   };
 
   const addressOptions = [

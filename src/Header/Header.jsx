@@ -1,7 +1,7 @@
 import React, { useContext} from 'react';
 import { AuthContext } from '../Context/Context';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import {Link} from 'react-router-dom';
 
 const Header = () => {
 
@@ -10,7 +10,7 @@ const Header = () => {
   if (!isLogged) {
     return (
       <>
-        <Link href="/login" variant="body2">
+        <Link to="/login">
           <Button
             type="submit"
             fullWidth
@@ -20,7 +20,7 @@ const Header = () => {
     Sign In
           </Button>
         </Link>
-        <Link href="/signup" variant="body2">
+        <Link to="/signup">
           <Button
             type="submit"
             fullWidth
@@ -34,7 +34,7 @@ const Header = () => {
     );
   }
   return (
-    <Link href="/profile" variant="body2">
+    <Link to="/profile">
       <Button
         type="submit"
         fullWidth
