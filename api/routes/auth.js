@@ -8,9 +8,9 @@ const password = require('./password');
 var cors = require('cors');
 
 var transporter = nodemailer.createTransport({
-  service: 'hotmail',
+  service: 'gmail',
   auth: {
-    user: 'helena_uni@live.ru',
+    user: 'elena.travelport@gmail.com',
     pass: password,
   }
 });
@@ -36,7 +36,7 @@ router.post('/sign-up', async (req, res) => {
       '12345',
     );
     const message = {
-      from: 'helena_uni@live.ru',
+      from: 'elena.travelport@gmail.com',
       to: 'helena_uni@live.ru',
       subject: 'Confirm Email',
       text: 'Please confirm your email',
