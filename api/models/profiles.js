@@ -29,6 +29,11 @@ const profilesSchema = new mongoose.Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  verified: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

@@ -38,27 +38,6 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-// Login
-router.post('/login', async (req, res) => {
-  try {
-    const profile = await Profile.findOne({
-      email: req.body.email
-    });
-    if (profile) {
-      const token = jwt.sign(
-        { email: profile.email },
-        '12345',
-      );
-      return res.status(200).json({token});
-    }
-    else {
-      return res.status(400).json({message: 'Not authorized'});
-    }
-  }
-  catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
 // Updating one
 router.patch('/:id', getProfile, async (req, res) => {
   if (req.body.name != null) {
