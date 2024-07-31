@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { SignIn } from '../SignIn/SignIn';
+import { instance} from '../utils';
 
 export const AuthContext = createContext();
 
@@ -23,7 +24,7 @@ const AuthProvider = ({children}) => {
     const savedToken = sessionStorage.getItem('token');
 
     if (savedToken) {
-      apiCall('post', 'http://localhost:3000/auth/silent-login',{ token: savedToken} ).then(() => {
+      instance.post('/auth/silent-login',{ token: savedToken} ).then(() => {
         setIsLogged(true);
         setToken(savedToken);
       });
@@ -34,14 +35,14 @@ const AuthProvider = ({children}) => {
   }, []);
 
   const login = async ({ email, password }) => {
-    const response = await apiCall('post', 'http://localhost:3000/auth/login', { email, password }).then(res => res.data);
+    const response = await instance.post('/auth/login', { email, password }).then(res => res.data);
     if (response) {
       saveToken(response.token);
     }
   };
 
   const signUp = async ({ email, password, name, surname, userType, address }) => {
-    const response = await apiCall('post', 'http://localhost:3000/auth/sign-up',{ email, password, name, surname, userType, address }).then(res => res.data);
+    const response = await instance.post('/auth/sign-up',{ email, password, name, surname, userType, address }).then(res => res.data);
     if (response) {
       saveToken(response.token);
     }

@@ -7,15 +7,20 @@ const profilesSchema = new mongoose.Schema({
   },
   surname: {
     type: String,
-    required: true
+    required: false
   },
   userType: {
     type: String,
-    required: true
+    required: false
+  },
+  role: {
+    type: mongoose.Types.ObjectId, 
+    ref: 'Role',
+    required: false
   },
   address: {
     type: String,
-    required: true
+    required: false
   },
   email: {
     type: String,
@@ -24,6 +29,10 @@ const profilesSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  photo: {
+    type: String,
+    required: false
   },
   subscribeDate: {
     type: Date,

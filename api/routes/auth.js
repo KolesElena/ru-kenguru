@@ -1,9 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const Profile = require('../models/profiles');
+const Roles = require('../models/roles');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const password = require('./password');
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date.toISOString() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(null, true);
+  } else {
+    cb(new Error('This type of photo is not supported'), false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter
+});
 
 var cors = require('cors');
 
@@ -16,14 +42,18 @@ var transporter = nodemailer.createTransport({
 });
 
 // Creating one
-router.post('/sign-up', async (req, res) => {
+router.post('/sign-up', upload.single('profilePhoto'), async (req, res) => {
+  const userRole = await Roles.findOne({name: 'User'});
+  console.log('hello');
   const profile = new Profile({
     name: req.body.name,
     surname: req.body.surname,
     userType: req.body.userType,
     address: req.body.address,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
+    photo: req.file.path,
+    role: userRole._id
   });
   try {
     const newProfile = await profile.save();

@@ -39,7 +39,8 @@ export const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    login(data.get('email'), data.get('password')).then(() => navigate('/')).catch((error) => console.log('Login error', error));
+    console.log(data.get('password'));
+    login({email: data.get('email'), password: data.get('password')}).then(() => navigate('/')).catch((error) => console.log('Login error', error));
   };
 
   useEffect(() => {
@@ -92,7 +93,7 @@ export const SignIn = () => {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12}>  
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."

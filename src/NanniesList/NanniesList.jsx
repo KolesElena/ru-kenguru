@@ -1,19 +1,26 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Unstable_Grid2';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import { NannyCard } from '../NannyCard/NannyCard';
+import { instance} from '../utils';
+
+import moment from 'moment';
+import { findAllByRole } from '@testing-library/react';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export const Nannies = () => {
 
   const [profiles, setProfiles ] = useState([ ]);
-
-  const apiCall = (method, url, data, params, headers) => {
-    return axios({
-      method,
-      url,
-      data,
-      params,
-      headers,
-    });
-  };
 
   // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkppbCI6ImhlbGVuYV91bmlAbGl2ZS5ydSIsImlhdCI6MTY5MjAzNzIxMn0.QhiRhIxKN0erL7WVmYL_JNJJgcGFyDtFUbBPPMJEWPg';
   const token = null;
@@ -24,21 +31,18 @@ export const Nannies = () => {
     axios.defaults.headers.common['Authorization'] = null;
   }
 
-  const getProfiles = () => apiCall(
-    'get', 
-    'http://localhost:3000/profiles',
-  ).then(res => setProfiles(res.data));
+  const getProfiles = () => instance.get('/profiles').then(({data}) => setProfiles(data));
 
-  useEffect(() => {
+  useEffect( () => {
     getProfiles();
   }, []);
 
-  console.log(profiles);
-  
   return (
-    <h1 data-testid='nannies_list' className="text-3xl font-bold">
-      List of Nanies
-    </h1>
+    <Box sx={{ width: '100%' }}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        {profiles.map((profile) => <NannyCard key={profile?.age} name={profile?.name} age={profile?.age} id={profile?._id} />)}
+      </Grid>
+    </Box>
   );
 };
 

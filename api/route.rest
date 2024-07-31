@@ -10,12 +10,19 @@ Content-Type: application/json
 
 {
     "name": "Elena",
-    "age": "45"
+    "age": "45",
+    "surname": "Test",
+    "role": "admin",
+    "email": "helena_uni@live.ru",
+    "password": "ole350008",
+    "address": "Sant Cugat",
+    "userType": "admin",
+    "photo": "http://google.com"
 }
 
 ###
 
-DELETE http://localhost:3000/profiles/643074be56ac13f4339583ae
+DELETE http://localhost:3000/profiles/64da300e8cc4b86c110e76b1
 
 ###
 

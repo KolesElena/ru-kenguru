@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     password: req.body.password,
   });
   try {
-    const newUser = await user.save();
+    await user.save();
     res.status(201);
   }
   catch (err) {
