@@ -15,7 +15,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { DatePickerComponent } from '../components/DatePicker';
-import { DatePicker } from 'antd';
 import { ChooseLanguage } from '../components/ChooseLanguage';
 
 export const ThirdSignUpStep = ({onFinish}) => {

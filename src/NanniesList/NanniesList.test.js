@@ -1,11 +1,8 @@
-import React from 'react';
-import { render, waitFor, act } from '@testing-library/react';
+import * as React from 'react';
+import {  screen, waitFor, act } from '@testing-library/react';
 import { Nannies } from './NanniesList';
 import { startServer } from '../tests/mock-server';
-
-import { TextEncoder } from 'node:util';
-
-global.TextEncoder = TextEncoder;
+import { render } from '../tests/utils.js';
 
 describe('Nannies list',() => {
 
@@ -18,6 +15,17 @@ describe('Nannies list',() => {
     const card = await screen.findByText('Elena');
 
     expect(card).toBeInTheDocument();
+  });
+
+  test('renders the div nannyTest', () => {
+    // Render the component
+    render(<Nannies/>);
+    act(async () => {
+      const card = await screen.getByTestId('nannyTest');
+
+      expect(card).toBeInTheDocument();
+
+    });
   });
 });
 

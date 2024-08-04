@@ -7,9 +7,6 @@ import Box from '@mui/material/Box';
 import { NannyCard } from '../NannyCard/NannyCard';
 import { instance} from '../utils';
 
-import moment from 'moment';
-import { findAllByRole } from '@testing-library/react';
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -39,8 +36,9 @@ export const Nannies = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <div data-testid='nannyTest'></div>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {profiles.map((profile) => <NannyCard key={profile?.age} name={profile?.name} age={profile?.age} id={profile?._id} />)}
+        {profiles.map((profile) => <NannyCard key={profile?._id} name={profile?.name} age={profile?.age} id={profile?._id} />)}
       </Grid>
     </Box>
   );
