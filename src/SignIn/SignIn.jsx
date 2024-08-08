@@ -50,7 +50,6 @@ export const SignIn = () => {
   }, [isLogged]);
 
   return (
-    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -112,7 +111,6 @@ export const SignIn = () => {
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
   );
 };
 
