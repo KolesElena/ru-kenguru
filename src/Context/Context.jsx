@@ -10,16 +10,6 @@ const AuthProvider = ({children}) => {
   const [isLogged, setIsLogged] = useState(null);
   const [token, setToken] = useState(null);
 
-  const apiCall = (method, url, data, params, headers) => {
-    return axios({
-      method,
-      url,
-      data,
-      params,
-      headers,
-    });
-  };
-
   useEffect(() => {
     const savedToken = sessionStorage.getItem('token');
 
