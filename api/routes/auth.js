@@ -52,7 +52,7 @@ router.post('/sign-up', upload.single('profilePhoto'), async (req, res) => {
     address: req.body.address,
     email: req.body.email,
     password: req.body.password,
-    photo: req.file.path,
+    // photo: req.file.path,
     role: userRole._id
   });
   try {
