@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import AuthProvider from '../Context/Context';
+import AuthProvider from '../Context/Context.tsx';
 import {
   BrowserRouter, MemoryRouter,
 } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 
 const defaultTheme = createTheme() ;
 
@@ -17,7 +17,7 @@ const customRender = (ui) => {
       <AuthProvider>
         <ThemeProvider theme={defaultTheme}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-        {children}
+            {children}
           </LocalizationProvider>
         </ThemeProvider>
       </AuthProvider>
@@ -30,9 +30,9 @@ const customRender = (ui) => {
 };
 
 export const ProviderWrapper = ({ children }) => (
-      <BrowserRouter>
-        {children}
-      </BrowserRouter>
+  <BrowserRouter>
+    {children}
+  </BrowserRouter>
 );
 
 export * from '@testing-library/react';

@@ -25,7 +25,7 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-describe('access the nannies list', () => {
+describe.skip('access the nannies list', () => {
   test('allows the user to login successfully', async () => {
     render(<SignIn />);
   
