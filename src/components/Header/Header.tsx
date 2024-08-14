@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context.tsx';
 import {Link} from 'react-router-dom';
 
 const settings = [
@@ -117,7 +117,7 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                   <Link to={page.link} key={page.title}>
                     <Typography textAlign="center">{page.title}</Typography>
                   </Link>
@@ -179,7 +179,7 @@ const Header = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
                     <Link to={setting.link}><Typography textAlign="center">{setting.title}</Typography></Link>
                   </MenuItem>
                 ))}

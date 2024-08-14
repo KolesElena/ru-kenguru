@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context.tsx';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,9 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-const instance = axios.create({baseURL: 'http://localhost:3001'});
+import { instance } from '../../utils.js';
 
 export const Profile = () => {
 
@@ -30,7 +28,7 @@ export const Profile = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log(data.get('photo')); 
-    await instance.put('/profiles/photo', data); 
+    await instance.put('/profiles/photo', data ); 
     const currentProfile = await instance.get('/profiles/current');
     setCurrentProfile(currentProfile?.data);
 
@@ -76,12 +74,6 @@ export const Profile = () => {
               />
             </Button>
             <img src={currentProfile?.photo} width='100px'/>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
           <Button
             type="submit"

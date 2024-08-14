@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context.tsx';
 import {Button, Select, Typography, Avatar, Stack} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 
-export const SecondSignUpStep = ({onFinish}) => {
+export const SecondSignUpStep = ({ onFinish }) => {
 
   const [userType, setUserType] = useState({userType: ''});
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context.tsx';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';

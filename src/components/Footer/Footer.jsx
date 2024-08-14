@@ -8,7 +8,7 @@ export const Footer =() => {
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
         <Link color="inherit" href="https://mui.com/">
-          Your Website
+          Ru kenguru
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}

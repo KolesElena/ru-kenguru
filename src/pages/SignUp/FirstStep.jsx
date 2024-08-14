@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context.tsx';
 import {Button, Select, Typography, Avatar} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';

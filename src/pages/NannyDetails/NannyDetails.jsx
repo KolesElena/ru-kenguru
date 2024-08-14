@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
-import { instance} from '../utils';
+import { instance} from '../../utils';
 import {useEffect, useState} from 'react';
 
 export const NannyDetails =() => {

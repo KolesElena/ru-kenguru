@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../Context/Context';
+import { AuthContext } from '../../Context/Context.tsx';
 import { Button, Select, Typography, Avatar, FormLabel } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -14,8 +14,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { DatePickerComponent } from '../components/DatePicker';
-import { ChooseLanguage } from '../components/ChooseLanguage';
+import { DatePickerComponent } from '../../components/DatePicker.jsx';
+import { ChooseLanguage } from '../../components/ChooseLanguage.jsx';
 
 export const ThirdSignUpStep = ({onFinish}) => {
 
