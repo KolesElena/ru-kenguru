@@ -26,7 +26,7 @@ Object.defineProperties(globalThis, {
     Blob: { value: Blob },
     File: { value: File },
     Headers: { value: Headers },
-    FormData: { value: FormData },
+//    FormData: { value: FormData },
     Request: { value: Request },
     Response: { value: Response },
 })

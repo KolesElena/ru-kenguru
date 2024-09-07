@@ -2,8 +2,8 @@ import * as React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { SignIn } from './SignIn.jsx';
-import { startServer } from '../../tests/mock-server/index.js';
-import { render } from '../../tests/utils.js';
+import { startServer } from '../../tests/mock-server/index.ts';
+import { render } from '../../tests/utils';
 
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -17,10 +17,10 @@ describe('Sign In',() => {
 
   test('when user logged it redirects to the homepage', async () => {
     render(<SignIn />);
-    const email = 'user@gmail.com';
-    const password = '123';
-    await userEvent.type(screen.getByLabelText('Email', {selector: 'input'}), email);
-    await userEvent.type(screen.getByLabelText('Password', {selector: 'input'}), password);
+    const [getEmail] = screen.getAllByLabelText('Email');
+    const [getPassword] = screen.getAllByLabelText('Password');
+    await userEvent.type(getEmail, 'user@gmail.com');
+    await userEvent.type(getPassword, '123');
     await userEvent.click(screen.getByText('Sign In'));
     expect(mockedUseNavigate).toHaveBeenCalledWith('/');
   });
