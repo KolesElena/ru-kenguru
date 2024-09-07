@@ -28,18 +28,14 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme() ;
-
 export const SignIn = () => {
   const navigate = useNavigate();
   const {login, isLogged} = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log('event', event.currentTarget)
     const data = new FormData(event.currentTarget);
-    console.log(data.get('password'));
     login({email: data.get('email'), password: data.get('password')}).then(() => navigate('/')).catch((error) => console.log('Login error', error));
   };
 
@@ -66,23 +62,20 @@ export const SignIn = () => {
         <Typography component="h1" variant="h5">
             Sign in
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={(event) => handleSubmit(event)} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 data-testid="email"
-                required
                 fullWidth
                 id="email"
                 label="Email"
                 name="email"
                 autoComplete="email"
-                onChange={(target) => {}}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
                 fullWidth
                 data-testid="password"
                 name="password"

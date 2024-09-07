@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../Context/Context.tsx';
+import { AuthContext } from '../../../Context/Context.tsx';
 import {Button, Select, Typography, Avatar} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -33,15 +33,6 @@ export const FirstSignUpStep = ({onFinish}) => {
   };
 
   console.log('values', values);
-
-  const handleNameChange = e => {
-    setName(e.target.value);
-    if (e.target !== null) {
-      setNameError(false);
-    } else {
-      setNameError(true);
-    }
-  };
 
   const addressOptions = [
     'Sant Cugat',
@@ -93,8 +84,8 @@ export const FirstSignUpStep = ({onFinish}) => {
               <TextField
                 required
                 label="First Name"
-                id="firstName"
-                name="firstName"
+                id="name"
+                name="name"
                 onChange={(e) => handleOnChange(e)}
                 error={nameError}
                 helperText={
@@ -104,11 +95,11 @@ export const FirstSignUpStep = ({onFinish}) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                required
                 fullWidth
-                id="lastName"
+                required
+                id="surname"
                 label="Last Name"
-                name="lastName"
+                name="surname"
                 onChange={(e) => handleOnChange(e)}
                 autoComplete="family-name"
               />
@@ -118,7 +109,7 @@ export const FirstSignUpStep = ({onFinish}) => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 onChange={(e) => handleOnChange(e)}
                 autoComplete="email"
@@ -126,7 +117,6 @@ export const FirstSignUpStep = ({onFinish}) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
                 fullWidth
                 name="password"
                 label="Password"

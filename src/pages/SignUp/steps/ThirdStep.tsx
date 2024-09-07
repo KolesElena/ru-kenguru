@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../Context/Context.tsx';
+import { AuthContext } from '../../../Context/Context.tsx';
 import { Button, Select, Typography, Avatar, FormLabel } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -14,39 +14,22 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { DatePickerComponent } from '../../components/DatePicker.jsx';
-import { ChooseLanguage } from '../../components/ChooseLanguage.jsx';
+import  DatePickerComponent  from '../../../components/DatePicker.tsx';
+import { ChooseLanguage } from '../../../components/ChooseLanguage.jsx';
 
 export const ThirdSignUpStep = ({onFinish}) => {
 
-  const [userType, setUserType] = useState('');
-  const [address, setAddress] = useState();
 
-  const {signUp} = useContext(AuthContext);  
+  const [birthDate, setBirthDate] = useState();
+  const [languages, setLanguages] = useState();
+  const [thirdStepData, setThirdStepData] = useState({'birthDate': birthDate, 'languages': languages});
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    signUp({ email: data.get('email'), password: data.get('password'), name: data.get('firstName'), surname: data.get('lastName'), photo: data.get('photo'), userType: userType, address: address}).then();
-    console.log( signUp({ email: data.get('email'), password: data.get('password'), name: data.get('firstName'), surname: data.get('lastName'), photo: data.get('photo'), userType: userType, address: address}).then());
+    const data = new FormData(event.target);
+    console.log('birthDate', data.get('birthDate'));
+    // return ({birthDate: data.get('birthDate'), languages: data.get('languages')});
   };
-
-  const addressOptions = [
-    'Sant Cugat',
-    'Barcelona',
-    'Castelldefells',
-  ];
-
-  const handleUserTypeChange = (event, type) => {
-    setUserType(event.target.value);
-  };
-
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
-  };
-
-  console.log(userType);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -65,18 +48,18 @@ export const ThirdSignUpStep = ({onFinish}) => {
         <Typography component="h1" variant="h5">
           Third step
         </Typography>
-        <Box component="form" noValidate onSubmit={(event) => onFinish(3, event, null)} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={(event) =>{ onFinish(3, {'birthDate': birthDate}, 4)}} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <FormControl fullWidth>
-                <FormLabel id="demo-simple-select-label">Date of Birth</FormLabel>
-                <DatePickerComponent />
+                <FormLabel name='birthDate'>Date of Birth</FormLabel>
+                <DatePickerComponent name='birthDate' onChange={(event) => setBirthDate(event)} value={birthDate}/>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-                <FormLabel id="demo-radio-buttons-group-label">What languages do you speak?</FormLabel>
-                <ChooseLanguage />
+                <FormLabel id="demo-radio-buttons-group-label" name='languages'>What languages do you speak?</FormLabel>
+                <ChooseLanguage checked={(event) => console.log('event', event)} />
               </FormControl>
             </Grid>
             <Button
@@ -85,7 +68,7 @@ export const ThirdSignUpStep = ({onFinish}) => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Complete registration
+              Next
             </Button>
           </Grid>
         </Box>

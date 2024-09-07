@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+
 const router = express.Router();
 const Profile = require('../models/profiles');
 const Roles = require('../models/roles');
@@ -6,12 +8,13 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const password = require('./password');
 const multer = require('multer');
+
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads');
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
   },
-  filename: function(req, file, cb) {
-    cb(null, new Date.toISOString() + file.originalname);
+  filename: (req, file, cb) => {
+    cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
   }
 });
 
@@ -28,7 +31,7 @@ const upload = multer({
   limits: {
     fileSize: 1024 * 1024 * 5,
   },
-  fileFilter: fileFilter
+ // fileFilter: fileFilter
 });
 
 var cors = require('cors');
@@ -42,7 +45,7 @@ var transporter = nodemailer.createTransport({
 });
 
 // Creating one
-router.post('/sign-up', upload.single('profilePhoto'), async (req, res) => {
+router.post('/sign-up', upload.single('photo'), async (req, res) => {
   const userRole = await Roles.findOne({name: 'User'});
   console.log('hello');
   const profile = new Profile({
@@ -52,7 +55,8 @@ router.post('/sign-up', upload.single('profilePhoto'), async (req, res) => {
     address: req.body.address,
     email: req.body.email,
     password: req.body.password,
-    // photo: req.file.path,
+    birthDate: req.body.birthDate,
+    photo: req.file.path,
     role: userRole._id
   });
   try {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {  screen, waitFor, act } from '@testing-library/react';
 import { Nannies } from './NanniesList.jsx';
-import { startServer } from '../../tests/mock-server/index.js';
-import { render } from '../../tests/utils.js';
+import { startServer } from '../../tests/mock-server/index.ts';
+import { render } from '../../tests/utils';
 
 describe('Nannies list',() => {
 

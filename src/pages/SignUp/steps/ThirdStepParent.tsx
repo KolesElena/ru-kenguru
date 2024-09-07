@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../Context/Context.tsx';
+import { AuthContext } from '../../../Context/Context.tsx';
 import { Button, Select, Typography, Avatar, FormLabel } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -13,9 +13,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { DatePickerComponent } from '../../components/DatePicker';
-import { ChooseLanguage } from '../../components/ChooseLanguage';
+import DatePickerComponent  from '../../../components/DatePicker.tsx';
+import { ChooseLanguage } from '../../../components/ChooseLanguage.jsx';
 
 export const ThirdSignUpStepParent = ({onFinish}) => {
 
@@ -65,7 +64,7 @@ export const ThirdSignUpStepParent = ({onFinish}) => {
         <Typography component="h1" variant="h5">
           Third step
         </Typography>
-        <Box component="form" noValidate onSubmit={(event) => onFinish(3, event, null)} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={(event) => onFinish(3, event, 4)} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <FormControl fullWidth>
@@ -85,7 +84,7 @@ export const ThirdSignUpStepParent = ({onFinish}) => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Complete registration
+              Next
             </Button>
           </Grid>
         </Box>

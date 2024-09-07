@@ -30,6 +30,10 @@ const profilesSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  birthDate: {
+    type: String,
+    required: false
+  },
   photo: {
     type: String,
     required: false

@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
-import { instance } from '../../utils.js';
+import { instance } from '../../utils.ts';
 
 export const Profile = () => {
 

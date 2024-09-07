@@ -1,8 +1,7 @@
 import React, { useState, createContext, useEffect, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import { AxiosInstance } from 'axios';
-import { SignIn } from '../SignIn/SignIn';
-import { instance } from '../utils';
+import { instance } from '../utils.ts';
 
 // Define the structure for the login credentials
 interface LoginCredentials {
@@ -16,6 +15,8 @@ interface SignUpData extends LoginCredentials {
   surname: string;
   userType: string;
   address: string;
+  birthDate: string;
+  photo: string;
 }
 
 // Define the props for the AuthProvider component
@@ -68,8 +69,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const signUp = async ({ email, password, name, surname, userType, address }: SignUpData ) => {
-    const response = await instance.post('/auth/sign-up',{ email, password, name, surname, userType, address }).then(res => res.data);
+  const signUp = async (formData: SignUpData ) => {
+    console.log(formData.get('photo'))
+    const response = await instance.post('/auth/sign-up', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+  }).then(res => res.data);
     if (response) {
       saveToken(response.token);
     }

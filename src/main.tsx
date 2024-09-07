@@ -6,7 +6,7 @@ import {
 import './index.css';
 import AuthProvider from './Context/Context.tsx';
 import {SignIn} from './pages/SignIn/SignIn';
-import {SignUp} from './pages/SignUp/SignUp.jsx';
+import {SignUp} from './pages/SignUp/SignUp.js';
 import { Nannies } from './pages/NanniesList/NanniesList.jsx';
 import { NannyDetails } from './pages/NannyDetails/NannyDetails.jsx';
 import { Profile } from './pages/Profile/Profile.jsx';

@@ -5,7 +5,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { NannyCard } from '../../components/NannyCard/NannyCard';
-import { instance} from '../../utils';
+import { instance} from '../../utils.ts';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
